@@ -4,10 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="./core/style/template.css" />
+  <link rel="stylesheet" href="./style/signIn.css" />
   <script type="text/javascript" src="./core/logic/template.js" defer></script>
   <script type="text/javascript" src="./core/logic/link-generator.js" defer></script>
-  <title>Home</title>
+  <title>Sign In</title>
 </head>
 
 <body>
@@ -22,7 +22,7 @@
           </svg>
         </button>
       </li>
-      <li class="active">
+      <li>
         <a href="home-EN.html">
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
             <path
@@ -161,7 +161,17 @@
       </svg>
     </a>
   </button>
-  <main></main>
+  <main>
+    <div class="signIn-form">
+      <form>
+        <h2>Sign in to Nix Docs</h1>
+          <input type="email" name="user" placeholder="Username or email address" maxlength="320" required />
+          <input type="password" name="user" placeholder="Password" required />
+          <button type="submit">Sign In</button>
+          <p>New to Nix Docs? <a href="#">Create an account</a></p>
+      </form>
+    </div>
+  </main>
 </body>
 <footer></footer>
 
