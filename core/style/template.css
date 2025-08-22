@@ -28,6 +28,7 @@
   right: 10px;
   z-index: 100;
   transition: all 0.4s;
+  cursor: pointer;
 }
 
 #theme-switch svg {
@@ -56,6 +57,7 @@
   right: 10px;
   z-index: 100;
   transition: all 0.4s;
+  cursor: pointer;
 }
 
 #language:hover svg {
@@ -120,7 +122,7 @@ body {
   list-style: none;
 }
 
-#sidebar>ul>li:first-child {
+#sidebar > ul > li:first-child {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 16px;
@@ -128,10 +130,12 @@ body {
   .logo {
     font-weight: 900;
     font-size: 2rem;
-    background: linear-gradient(45deg,
-        var(--line-clr),
-        var(--hover-clr),
-        var(--line-clr));
+    background: linear-gradient(
+      45deg,
+      var(--line-clr),
+      var(--hover-clr),
+      var(--line-clr)
+    );
     color: transparent;
     background-clip: text;
     background-size: 400% 400%;
@@ -194,7 +198,7 @@ body {
   grid-template-rows: 0fr;
   transition: 300ms ease-in-out;
 
-  >div {
+  > div {
     overflow: hidden;
   }
 }
@@ -266,7 +270,7 @@ body {
     top: unset;
     bottom: 0;
 
-    >ul {
+    > ul {
       padding: 0;
       display: grid;
       grid-auto-columns: 60px;
@@ -305,7 +309,7 @@ body {
       display: flex;
       justify-content: center;
 
-      >div {
+      > div {
         overflow-x: auto;
       }
 
