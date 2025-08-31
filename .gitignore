@@ -1,1 +1,29 @@
-.env
+# Maven / Java
+/target/
+/*.iml
+/.idea/
+/*.class
+*.log
+*.jar
+*.war
+*.ear
+
+# JetBrains IDE
+*.iml
+.idea/
+out/
+
+# VSCode
+.vscode/
+
+# Python temp files (since you have Python scripts)
+/__pycache__/
+/*.py[cod]
+tempCodeRunnerFile.py
+
+# Node / Frontend (if you add Node packages later)
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
