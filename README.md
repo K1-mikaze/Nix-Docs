@@ -14,7 +14,7 @@ El flujo de trabajo del Git de Nix Docs tiene una forma definida, dicho flujo de
 
 La segunda característica se identifica a la hora de subir código al repositorio, Las ramas de larga vida útil nunca van tener un commit directo, es decir nunca se va crear un archivo y desarrollarlo es las ramas de larga vida útil ademas de que dichas ramas nunca se van a eliminar, la única forma de que dichas ramas obtengan código es utilizando Merge.
 
-![Flujo de trabajo de Git](./image/flujo-git.png)
+![Flujo de trabajo de Git](./frontend/image/flujo-git.png)
 
 ### Ramas de Larga Vida Util
 
@@ -42,7 +42,7 @@ Nix Docs is project focus in solving the big documentation gap that the Nix Ecos
 
 The Git Workflow of Nix Docs is defined in a special way, and has many different branches and can be sort by Long-Running branches and Short-Running branches the characteristics of the Long-Running branches only get new code using Merge and this branches never are delete.
 
-![Git Workflow](./image/git-workflow.png)
+![Git Workflow](./frontend/image/git-workflow.png)
 
 ### Long-Running Branches
 
