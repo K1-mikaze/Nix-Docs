@@ -1,8 +1,12 @@
 C:\Users\juand\OneDrive\Escritorio\other\This is me\version2\projects\Nix\Nix-Docs\backend\src\main\java\nixdocs\config\AppConfig.java
 C:\Users\juand\OneDrive\Escritorio\other\This is me\version2\projects\Nix\Nix-Docs\backend\src\main\java\nixdocs\config\AppCore.java
+C:\Users\juand\OneDrive\Escritorio\other\This is me\version2\projects\Nix\Nix-Docs\backend\src\main\java\nixdocs\config\DBConnection.java
 C:\Users\juand\OneDrive\Escritorio\other\This is me\version2\projects\Nix\Nix-Docs\backend\src\main\java\nixdocs\controller\UserController.java
+C:\Users\juand\OneDrive\Escritorio\other\This is me\version2\projects\Nix\Nix-Docs\backend\src\main\java\nixdocs\dto\UserDto.java
 C:\Users\juand\OneDrive\Escritorio\other\This is me\version2\projects\Nix\Nix-Docs\backend\src\main\java\nixdocs\Main.java
+C:\Users\juand\OneDrive\Escritorio\other\This is me\version2\projects\Nix\Nix-Docs\backend\src\main\java\nixdocs\mapper\UserMapper.java
 C:\Users\juand\OneDrive\Escritorio\other\This is me\version2\projects\Nix\Nix-Docs\backend\src\main\java\nixdocs\model\User.java
+C:\Users\juand\OneDrive\Escritorio\other\This is me\version2\projects\Nix\Nix-Docs\backend\src\main\java\nixdocs\repository\UserEntity.java
 C:\Users\juand\OneDrive\Escritorio\other\This is me\version2\projects\Nix\Nix-Docs\backend\src\main\java\nixdocs\repository\UserRepository.java
 C:\Users\juand\OneDrive\Escritorio\other\This is me\version2\projects\Nix\Nix-Docs\backend\src\main\java\nixdocs\service\UserService.java
 C:\Users\juand\OneDrive\Escritorio\other\This is me\version2\projects\Nix\Nix-Docs\backend\src\main\java\nixdocs\util\JsonUtil.java
