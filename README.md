@@ -34,6 +34,13 @@ La segunda característica se identifica a la hora de subir código al repositor
 
 Estas ramas obtienen código a través del la edición o creación de nuevo archivos.
 
+## Endpoints Requeridos
+| **Nombre**  | **Metodo**  | **Parametro**  | **Retorno**  | **Accion** | 
+| ------------- | -------------- | -------------- | -------------- | -------------- |
+| `localhost/8080/signin/`  | POST | Objeto con dos campos,email y contraseña | Token generado y guardado en la base de datos  | Validar si el email y contraseña son correctos en la base de datos | 
+
+
+
 # Nix Docs English
 
 Nix Docs is project focus in solving the big documentation gap that the Nix Ecosystem has in a beginner friendly way.
@@ -61,3 +68,10 @@ The Git Workflow of Nix Docs is defined in a special way, and has many different
 **fix** this branch contain bugs correction.
 
 This branches get code through creating new files and updating existing files.
+
+## Required Endpoints
+
+| **Name**  | **Method**  | **Parameters**  | **Return**  | **Action** | 
+| ------------- | -------------- | -------------- | -------------- | -------------- |
+| `localhost/8080/signin/`  | POST | Object with 2 spaces, email and password | Genereted inside the Database that will be saved in the Dabatase  | Check if the email and the password are correct in the Database | 
+
