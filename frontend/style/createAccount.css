@@ -1,0 +1,67 @@
+@import url("../core/style/template.css");
+
+main {
+  justify-content: center;
+  align-content: center;
+}
+
+.createAccount-form form {
+  background-color: var(--base-clr);
+  display: flex;
+  flex-flow: column;
+  border-radius: 0.4rem;
+  height: 600px;
+  width: 400px;
+  justify-self: center;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  text-align: center;
+  border: solid 2px var(--line-clr);
+}
+
+.createAccount-form input {
+  border-radius: 0.4rem;
+  border: solid 2px var(--line-clr);
+  color: var(--text-clr);
+  height: 30px;
+  width: 300px;
+  text-align: center;
+  background-color: var(--base-clr);
+}
+
+.createAccount-form button {
+  width: 300px;
+  border: none;
+  height: 30px;
+  font-weight: 900;
+  border-radius: 0.2rem;
+  color: var(--text-clr);
+  background-color: var(--line-clr);
+}
+
+.createAccount-form button:hover {
+  background-color: var(--hover-clr);
+}
+
+.createAccount-form a {
+  color: var(--line-clr);
+  text-decoration: none;
+}
+
+body {
+  background-image: url(../image/wallpaper-center-light.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.darkmode {
+  background-image: url(../image/wallpaper-center-dark.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+}
