@@ -19,7 +19,7 @@ function formInputs(direction: string): any {
 }
 
 
-function RequestData(formObject, direction: string) {
+function RequestData(formObject: any, direction: string) {
   fetch(direction, {
     method: 'POST',
     headers: {
@@ -42,4 +42,4 @@ function RequestData(formObject, direction: string) {
 }
 
 
-document.addEventListener('DOMContentLoaded', formInputs('http://localhost:3000/greet'));
+document.addEventListener('DOMContentLoaded', formInputs('http://localhost:8080/signin'));
