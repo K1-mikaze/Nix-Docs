@@ -1,5 +1,3 @@
-export { };
-
 function formInputs(direction: string): any {
   let signInForm: any = document.getElementById('signIn');
 
