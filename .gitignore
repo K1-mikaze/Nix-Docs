@@ -1,5 +1,5 @@
 # Maven / Java
-/target/
+target/
 /*.iml
 /.idea/
 /*.class
@@ -7,6 +7,8 @@
 *.jar
 *.war
 *.ear
+.env
+.smarttomcat/
 
 # JetBrains IDE
 *.iml
