@@ -54,6 +54,31 @@ main {
   opacity: 65%;
 }
 
+/* Estilos para alertas */
+.alert {
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 3px;
+  text-align: left;
+}
+
+.alert p {
+  margin: 0;
+  color: inherit;
+}
+
+.alert-error {
+  background-color: #ffebee;
+  border: 1px solid #ffcdd2;
+  color: #c62828;
+}
+
+.alert-success {
+  background-color: #e8f5e9;
+  border: 1px solid #c8e6c9;
+  color: #2e7d32;
+}
+
 body {
   background-image: url(../image/wallpaper-center-light.png);
   background-repeat: no-repeat;

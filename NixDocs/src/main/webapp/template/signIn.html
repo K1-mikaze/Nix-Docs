@@ -6,7 +6,7 @@
   <link rel="icon" type="image/png" th:href="@{/static/image/Nix-Docs-logo.png}">
   <link rel="stylesheet" th:href="@{/static/style/signIn.css}" />
   <script type="text/javascript" th:src="@{/static/core/logic/template.js}" defer></script>
-  <title th:text="@{pageTitle}"></title>
+  <title th:text="${pageTitle}">Sign In</title>
 </head>
 
 <body>
@@ -162,15 +162,26 @@
   </button>
   <main>
     <div class="signIn-form">
-      <form id="signIn">
-        <img th:src="@{/static/image/Nix-Docs-logo.png}" alt="">
+       <form id="signIn" th:action="@{/signin}" method="post">
+        <img th:src="@{/static/image/Nix-Docs-logo.png}" alt="Nix Docs Logo">
         <h2>Sign in to Nix Docs</h2>
-          <input type="email" id="email"  name="email" placeholder="Username or email address" maxlength="320" required />
-          <input type="password"  id="password" name="password" title="Password must be at least 8 characters long, has 1 Upper case character,1 special character and a number" pattern="^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{8,}" minlength="8" placeholder="Password" required />
-          <button type="submit">Sign In</button>
-          <p>or</p>
-          <button class="continue-with-github" type="button">Continue with GitHub</button>
-          <p>New to Nix Docs? <a href="#" target="_blank" title="Go to create an account">Create an account</a></p>
+        
+        <!-- Mensaje de error -->
+        <div th:if="${errorMessage}" class="alert alert-error">
+          <p th:text="${errorMessage}"></p>
+        </div>
+        
+        <!-- Mensaje de éxito -->
+        <div th:if="${successMessage}" class="alert alert-success">
+          <p th:text="${successMessage}"></p>
+        </div>
+        
+        <input type="text" id="email" name="email" placeholder="Username or email address" maxlength="320" required />
+        <input type="password" id="password" name="password" placeholder="Password" required />
+        <button type="submit">Sign In</button>
+        <p>or</p>
+        <button class="continue-with-github" type="button">Continue with GitHub</button>
+        <p>New to Nix Docs? <a th:href="@{/signup}" title="Go to create an account">Create an account</a></p>
       </form>
     </div>
   </main>

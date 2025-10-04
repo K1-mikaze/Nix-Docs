@@ -1,14 +1,14 @@
 package com.nixdocs.util.templateEngine;
 
-import jakarta.servlet.ServletContext;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.WebApplicationTemplateResolver;
 import org.thymeleaf.web.IWebApplication;
-import org.thymeleaf.web.servlet.JakartaServletWebApplication;
+import org.thymeleaf.web.servlet.JavaxServletWebApplication;
 
 public class ThymeleafUtil {
 
@@ -32,8 +32,8 @@ public class ThymeleafUtil {
 		}
 	}
 
-	private static WebApplicationTemplateResolver getWebApplicationTemplateResolver(ServletContext servletContext,boolean cachable) {
-		IWebApplication webApplication = JakartaServletWebApplication.buildApplication(servletContext);
+    private static WebApplicationTemplateResolver getWebApplicationTemplateResolver(ServletContext servletContext,boolean cachable) {
+        IWebApplication webApplication = JavaxServletWebApplication.buildApplication(servletContext);
 
 		WebApplicationTemplateResolver templateResolver = new WebApplicationTemplateResolver(webApplication);
 		templateResolver.setTemplateMode(TemplateMode.HTML);
@@ -59,11 +59,11 @@ public class ThymeleafUtil {
 
 		response.setContentType("text/html;charset=UTF-8");
 
-		org.thymeleaf.context.WebContext context = new org.thymeleaf.context.WebContext(
-			JakartaServletWebApplication.buildApplication(request.getServletContext())
-				.buildExchange(request, response),
-			request.getLocale()
-		);
+        org.thymeleaf.context.WebContext context = new org.thymeleaf.context.WebContext(
+            JavaxServletWebApplication.buildApplication(request.getServletContext())
+                .buildExchange(request, response),
+            request.getLocale()
+        );
 
 		if (variables != null) {
 			variables.forEach(context::setVariable);
