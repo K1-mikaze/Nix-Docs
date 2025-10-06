@@ -1,27 +1,22 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
-                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.nixdocs</groupId>
     <artifactId>NixDocs</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>NixDocs-1.0-SNAPSHOT</name>
-    
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <jakartaee>11.0.0-M1</jakartaee>
     </properties>
-    
+
     <dependencies>
-        <!-- Usar javax.servlet-api para compatibilidad con Tomcat 8.5 (Servlet 4.0) -->
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.1</version>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+            <version>${jakartaee}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -50,17 +45,16 @@
             <version>0.4</version>
         </dependency>
     </dependencies>
-    
+
     <build>
-        <finalName>NixDocs</finalName> 
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.12.1</version>
                 <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
+                    <source>17</source>
+                    <target>17</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -69,5 +63,14 @@
                 <version>3.4.0</version>
             </plugin>
         </plugins>
+    <resources>
+        <resource>
+            <directory>.</directory>
+            <includes>
+                <include>.env</include>
+            </includes>
+        </resource>
+    </resources>
     </build>
 </project>
+

@@ -4,11 +4,13 @@ import com.nixdocs.controller.pojo.Controller;
 import com.nixdocs.controller.pojo.LoginController;
 import com.nixdocs.controller.pojo.RegisterController;
 import com.nixdocs.controller.pojo.HomeController;
-import javax.servlet.ServletException;
 import com.nixdocs.util.templateEngine.ThymeleafUtil;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 
 import java.io.IOException;
 import java.util.HashMap;

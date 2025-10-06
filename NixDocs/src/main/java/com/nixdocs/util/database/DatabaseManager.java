@@ -7,51 +7,53 @@ import com.zaxxer.hikari.HikariDataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-/**
- * Clase Singleton que gestiona el pool de conexiones a la base de datos
- * utilizando HikariCP.
- */
 public class DatabaseManager {
-    private static final DatabaseManager INSTANCE = new DatabaseManager();
+    private static final DatabaseManager INSTANCE;
     private final HikariDataSource dataSource;
 
-    private DatabaseManager() {
-        HikariConfig config = new HikariConfig();
-        config.setJdbcUrl(EnvironmentConfig.getDbUrl());
-        config.setUsername(EnvironmentConfig.getDbUsername());
-        config.setPassword(EnvironmentConfig.getDbPassword());
-        
-        // Configuración opcional desde variables de entorno
-        config.setMaximumPoolSize(EnvironmentConfig.getMaxPoolSize());
-        config.setConnectionTimeout(EnvironmentConfig.getConnectionTimeout());
-        
-        // Configuración adicional recomendada
-        config.setAutoCommit(true);
-        config.setMinimumIdle(5);
-        config.addDataSourceProperty("cachePrepStmts", "true");
-        config.addDataSourceProperty("prepStmtCacheSize", "250");
-        config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
-        
-        dataSource = new HikariDataSource(config);
+    static {
+        try {
+            INSTANCE = new DatabaseManager();
+        } catch (Exception e) {
+            System.err.println("=======! DatabaseManager initialization failed: " + e.getMessage());
+            throw new ExceptionInInitializerError(e);
+        }
     }
 
-    /**
-     * Obtiene una conexión del pool de conexiones.
-     * 
-     * @return Una conexión a la base de datos
-     * @throws SQLException Si ocurre un error al obtener la conexión
-     */
+    private DatabaseManager() {
+        try {
+            HikariConfig config = new HikariConfig();
+
+            config.setJdbcUrl(EnvironmentConfig.getDbUrl());
+            config.setUsername(EnvironmentConfig.getDbUsername());
+            config.setPassword(EnvironmentConfig.getDbPassword());
+            config.setDriverClassName(EnvironmentConfig.getDbDriver());
+
+            // this is optional
+            config.setMaximumPoolSize(EnvironmentConfig.getMaxPoolSize());
+            config.setConnectionTimeout(EnvironmentConfig.getConnectionTimeout());
+
+            dataSource = new HikariDataSource(config);
+
+            try (Connection testConn = dataSource.getConnection()) {
+                System.out.println(" =====> DatabaseManager: Successfully connected to database <=======");
+            }
+
+        } catch (Exception e) {
+            System.err.println("=========! DatabaseManager: Failed to initialize database connection: " + e.getMessage()  );
+            e.printStackTrace();
+            throw new RuntimeException("=======! Database initialization failed", e);
+        }
+    }
+
     public static Connection getConnection() throws SQLException {
         return INSTANCE.dataSource.getConnection();
     }
 
-    /**
-     * Cierra el pool de conexiones.
-     * Este método debe ser llamado cuando la aplicación se detenga.
-     */
     public static void closePool() {
         if (INSTANCE.dataSource != null && !INSTANCE.dataSource.isClosed()) {
             INSTANCE.dataSource.close();
+            System.out.println("====> DatabaseManager: Connection pool closed <=====");
         }
     }
 }

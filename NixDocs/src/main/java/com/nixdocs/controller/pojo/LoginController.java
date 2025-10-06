@@ -4,10 +4,10 @@ import com.nixdocs.model.User;
 import com.nixdocs.repository.PostgresUserRepository;
 import com.nixdocs.repository.UserRepository;
 import com.nixdocs.util.templateEngine.ThymeleafUtil;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.HashMap;

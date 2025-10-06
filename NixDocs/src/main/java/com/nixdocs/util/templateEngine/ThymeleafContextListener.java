@@ -1,34 +1,31 @@
 package com.nixdocs.util.templateEngine;
 
 import com.nixdocs.util.database.DatabaseManager;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-import javax.servlet.annotation.WebListener;
+import jakarta.servlet.ServletContextEvent;
+import jakarta.servlet.ServletContextListener;
+import jakarta.servlet.annotation.WebListener;
+
 
 @WebListener
 public class ThymeleafContextListener implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-		// Inicializar Thymeleaf
 		ThymeleafUtil.initialize(sce.getServletContext(),false); // Cachable should be true in production
-		System.out.println("🔄 NixDocs: Thymeleaf initialized successfully");
+		System.out.println("======> Thymeleaf initialized <========");
 		
-		// La primera llamada a getConnection inicializará el pool de conexiones
 		try {
 			DatabaseManager.getConnection().close();
-			System.out.println("🔄 NixDocs: Database connection pool initialized successfully");
+			System.out.println("======> Database connection pool initialized  <========");
 		} catch (Exception e) {
-			System.err.println("❌ NixDocs: Error initializing database connection pool: " + e.getMessage());
+			System.err.println("======! Error initializing database connection pool: " + e.getMessage());
 		}
 	}
 
 	@Override
 	public void contextDestroyed(ServletContextEvent sce) {
-		// Cerrar el pool de conexiones
+
 		DatabaseManager.closePool();
-		System.out.println("🔄 NixDocs: Database connection pool closed");
-		
-		System.out.println("🔴 NixDocs: Application shutting down");
+		System.out.println("=====> Database connection pool closed <======");
 	}
 }
