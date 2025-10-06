@@ -4,7 +4,6 @@ import com.nixdocs.model.User;
 import com.nixdocs.repository.PostgresUserRepository;
 import com.nixdocs.repository.UserRepository;
 import com.nixdocs.util.templateEngine.ThymeleafUtil;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -22,39 +21,20 @@ public class LoginController implements Controller {
     private final UserRepository userRepository = new PostgresUserRepository();
 
     @Override
-    public void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        showLoginForm(request, response);
+    public void processGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+            showLoginForm(request, response);
     }
 
     @Override
-    public void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void processPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         handleLogin(request, response);
     }
 
-    public void showLoginForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void showLoginForm(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Map<String, Object> variables = new HashMap<>();
         variables.put("pageTitle", "Sign In");
 
-        // Mensajes desde la sesión si existen
-        String errorMessage = (String) request.getSession().getAttribute("errorMessage");
-        String successMessage = (String) request.getSession().getAttribute("successMessage");
-
-        if (errorMessage != null) {
-            variables.put("errorMessage", errorMessage);
-            request.getSession().removeAttribute("errorMessage");
-        }
-
-        if (successMessage != null) {
-            variables.put("successMessage", successMessage);
-            request.getSession().removeAttribute("successMessage");
-        }
-
-        // Renderizar plantilla de login (asegurado que Thymeleaf está inicializado por el Front Controller)
-        try {
-            ThymeleafUtil.renderTemplate(request, response, "signIn", variables);
-        } catch (Exception e) {
-            throw new ServletException("Error renderizando la plantilla signIn", e);
-        }
+        ThymeleafUtil.renderTemplate(request, response, "signIn", variables);
     }
 
     public void handleLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {

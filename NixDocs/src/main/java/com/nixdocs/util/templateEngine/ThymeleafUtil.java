@@ -1,5 +1,6 @@
 package com.nixdocs.util.templateEngine;
 
+import java.io.IOException;
 import java.util.Map;
 
 import jakarta.servlet.ServletContext;
@@ -57,7 +58,7 @@ public class ThymeleafUtil {
 	public static void renderTemplate(HttpServletRequest request,
 									  HttpServletResponse response,
 									  String templateName,
-									  Map<String, Object> variables) throws Exception {
+									  Map<String, Object> variables) throws IOException {
 
 		response.setContentType("text/html;charset=UTF-8");
 
