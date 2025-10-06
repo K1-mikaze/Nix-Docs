@@ -23,7 +23,7 @@ public class FrontControllerServlet extends HttpServlet {
     private final Map<String, Controller> controllers = new HashMap<>();
 
     @Override
-    public void init() throws ServletException {
+    public void init(){
         ThymeleafUtil.initialize(getServletContext(), false);
 
         controllers.put("login", new LoginController());

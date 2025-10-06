@@ -2,7 +2,6 @@ package com.nixdocs.controller.pojo;
 
 import com.nixdocs.util.templateEngine.ThymeleafUtil;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
