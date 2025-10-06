@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header Example</title>
+    <style>
+        .header {
+            background-color: #24292e;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+        }
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+        .user-menu {
+            position: relative;
+            cursor: pointer;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 4px;
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        .user-menu:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Este es un fragmento de Thymeleaf que puede ser incluido en otras páginas -->
+    <header th:fragment="header" class="header">
+        <div class="logo">Nix Docs</div>
+        
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/docs">Documentation</a>
+            <a href="/about">About</a>
+            
+            <!-- Contenido condicional basado en el estado de la sesión -->
+            <div th:if="${session.userId != null}" class="user-menu">
+                <!-- Si el usuario ha iniciado sesión, mostrar su nombre y menú desplegable -->
+                <span th:text="'Bienvenido, ' + ${session.username}">Bienvenido, Usuario</span>
+                <div class="dropdown-content">
+                    <a href="/profile">Mi Perfil</a>
+                    <a href="/settings">Configuración</a>
+                    <a href="/logout">Cerrar Sesión</a>
+                </div>
+            </div>
+            
+            <!-- Si el usuario NO ha iniciado sesión, mostrar enlaces de inicio de sesión y registro -->
+            <div th:unless="${session.userId != null}">
+                <a th:href="@{/signin}">Iniciar Sesión</a>
+                <a th:href="@{/signup}">Registrarse</a>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Ejemplo de cómo incluir este fragmento en otras páginas -->
+    <div style="margin: 20px; padding: 20px; border: 1px solid #ccc; border-radius: 5px;">
+        <h2>Cómo usar este fragmento en otras páginas:</h2>
+        <pre style="background-color: #f5f5f5; padding: 10px; border-radius: 5px;">
+&lt;!-- Incluir el fragmento header en otra página --&gt;
+&lt;div th:replace="~{header :: header}"&gt;&lt;/div&gt;
+        </pre>
+    </div>
+</body>
+</html>

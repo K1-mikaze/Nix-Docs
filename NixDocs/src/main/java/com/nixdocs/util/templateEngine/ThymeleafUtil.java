@@ -1,9 +1,11 @@
 package com.nixdocs.util.templateEngine;
 
+import java.util.Map;
+
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.Map;
+
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.WebApplicationTemplateResolver;
@@ -15,7 +17,7 @@ public class ThymeleafUtil {
 	private static TemplateEngine templateEngine;
 	private static boolean initialized = false;
 
-	public static void initialize(ServletContext servletContext,boolean cachable) {
+	public static void initialize(ServletContext servletContext, boolean cachable) {
 		if (initialized) {
 			return;
 		}
@@ -28,12 +30,12 @@ public class ThymeleafUtil {
 
 			initialized = true;
 		} catch (Exception e) {
-			throw new RuntimeException("===== NixDocs: Failed to initialize Thymeleaf ========\n", e);
+			throw new RuntimeException("=====! NixDocs: Failed to initialize Thymeleaf !========\n", e);
 		}
 	}
 
-	private static WebApplicationTemplateResolver getWebApplicationTemplateResolver(ServletContext servletContext,boolean cachable) {
-		IWebApplication webApplication = JakartaServletWebApplication.buildApplication(servletContext);
+    private static WebApplicationTemplateResolver getWebApplicationTemplateResolver(ServletContext servletContext,boolean cachable) {
+        IWebApplication webApplication = JakartaServletWebApplication.buildApplication(servletContext);
 
 		WebApplicationTemplateResolver templateResolver = new WebApplicationTemplateResolver(webApplication);
 		templateResolver.setTemplateMode(TemplateMode.HTML);
@@ -47,23 +49,23 @@ public class ThymeleafUtil {
 
 	public static TemplateEngine getTemplateEngine() {
 		if (!initialized) {
-			throw new IllegalStateException("NixDocs: Thymeleaf not initialized");
+			throw new IllegalStateException("======! NixDocs: Thymeleaf not initialized !=========");
 		}
 		return templateEngine;
 	}
 
 	public static void renderTemplate(HttpServletRequest request,
-		HttpServletResponse response,
-		String templateName,
-		Map<String, Object> variables) throws Exception {
+									  HttpServletResponse response,
+									  String templateName,
+									  Map<String, Object> variables) throws Exception {
 
 		response.setContentType("text/html;charset=UTF-8");
 
-		org.thymeleaf.context.WebContext context = new org.thymeleaf.context.WebContext(
-			JakartaServletWebApplication.buildApplication(request.getServletContext())
-				.buildExchange(request, response),
-			request.getLocale()
-		);
+        org.thymeleaf.context.WebContext context = new org.thymeleaf.context.WebContext(
+            JakartaServletWebApplication.buildApplication(request.getServletContext())
+                .buildExchange(request, response),
+            request.getLocale()
+        );
 
 		if (variables != null) {
 			variables.forEach(context::setVariable);
