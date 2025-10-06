@@ -11,21 +11,13 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Controlador POJO para registro de usuarios (stub inicial).
- */
 public class RegisterController implements Controller {
 
     @Override
-    public void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void processGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Map<String, Object> variables = new HashMap<>();
         variables.put("pageTitle", "Create Account");
-        // Renderizar plantilla de login (asegurado que Thymeleaf está inicializado por el Front Controller)
-        try {
-            ThymeleafUtil.renderTemplate(request, response, "signIn", variables);
-        } catch (Exception e) {
-            throw new ServletException("Error renderizando la plantilla signIn", e);
-        }
+            ThymeleafUtil.renderTemplate(request, response, "createAccount", variables);
     }
 
     @Override
