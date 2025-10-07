@@ -26,9 +26,9 @@ public class FrontControllerServlet extends HttpServlet {
     public void init(){
         ThymeleafUtil.initialize(getServletContext(), false);
 
-        controllers.put("login", new LoginController());
-        controllers.put("register", new RegisterController());
-        controllers.put("home", new HomeController());
+        controllers.put("app/login", new LoginController());
+        controllers.put("app/register", new RegisterController());
+        controllers.put("app/home", new HomeController());
         // Add more controller if is Necessary
     }
 
@@ -48,17 +48,14 @@ public class FrontControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         
         String pathInfo = request.getPathInfo();
-        
+
         if (pathInfo == null || pathInfo.equals("/")) {
-            controllers.get("home").processGet(request,response);
+            controllers.get("app/home").processGet(request,response);
             return;
         }
 
         String controllerName = pathInfo.substring(1);
-        if (controllerName.contains("/")) {
-            controllerName = controllerName.split("/")[0];
-        }
-        
+
         Controller controller = controllers.get(controllerName);
         if (controller != null) {
             if (method.equals("GET")) {
@@ -67,7 +64,7 @@ public class FrontControllerServlet extends HttpServlet {
                 controller.processPost(request, response);
             }
         } else {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND, "Página no encontrada");
+            response.sendError(HttpServletResponse.SC_NOT_FOUND, "Page not found");
         }
     }
 }
