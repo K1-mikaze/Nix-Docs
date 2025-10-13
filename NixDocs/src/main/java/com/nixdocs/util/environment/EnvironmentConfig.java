@@ -15,15 +15,14 @@ public class EnvironmentConfig {
 
         } catch (Exception e) {
             System.err.println("========! EnvironmentConfig: Dotenv initialization failed: " + e.getMessage());
-            loadedDotenv = null;
         }
 
         dotenv = loadedDotenv;
 
-        if (dotenv != null && dotenv.get("DB_URL") != null) {
+        if (dotenv != null && dotenv.get("DB_URL") != null && dotenv.get("DB_USERNAME") != null && dotenv.get("DB_PASSWORD") != null && dotenv.get("EMAIL_ADDRESS") != null && dotenv.get("EMAIL_PASSWORD") != null) {
             System.out.println("======> EnvironmentConfig: .env configuration loaded <====");
         } else {
-            System.err.println("======! EnvironmentConfig: Using system properties, Create the .env file with the appropriate keys!=======");
+            System.err.println("======! EnvironmentConfig: Using system properties, Create the .env file with the appropriate keys or read the README.md file!=======");
         }
     }
 
@@ -39,6 +38,13 @@ public class EnvironmentConfig {
         return getValue("DB_PASSWORD", true);
     }
 
+    public static String getEmailAddress() {
+        return getValue("EMAIL_ADDRESS", true);
+    }
+
+    public static String getEmailPassword() {
+        return getValue("EMAIL_PASSWORD", true);
+    }
     public static String getDbDriver() {
         return getValue("DB_DRIVER", false, "org.postgresql.Driver");
     }
@@ -52,6 +58,7 @@ public class EnvironmentConfig {
         String value = getValue("DB_CONNECTION_TIMEOUT", false, "30000");
         return Integer.parseInt(value);
     }
+
 
     private static String getValue(String key, boolean required) {
         return getValue(key, required, null);
