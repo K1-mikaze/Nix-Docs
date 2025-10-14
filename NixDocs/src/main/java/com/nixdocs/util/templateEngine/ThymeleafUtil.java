@@ -1,5 +1,6 @@
 package com.nixdocs.util.templateEngine;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.Map;
 
@@ -8,6 +9,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.context.WebContext;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.WebApplicationTemplateResolver;
 import org.thymeleaf.web.IWebApplication;
@@ -55,6 +58,8 @@ public class ThymeleafUtil {
 		return templateEngine;
 	}
 
+
+
 	public static void renderTemplate(HttpServletRequest request,
 									  HttpServletResponse response,
 									  String templateName,
@@ -62,7 +67,7 @@ public class ThymeleafUtil {
 
 		response.setContentType("text/html;charset=UTF-8");
 
-        org.thymeleaf.context.WebContext context = new org.thymeleaf.context.WebContext(
+        WebContext context = new WebContext(
             JakartaServletWebApplication.buildApplication(request.getServletContext())
                 .buildExchange(request, response),
             request.getLocale()
@@ -71,7 +76,11 @@ public class ThymeleafUtil {
 		if (variables != null) {
 			variables.forEach(context::setVariable);
 		}
-
 		getTemplateEngine().process(templateName, context, response.getWriter());
+	}
+
+	public static String getParsedTemplate (String templateName,WebContext context){
+		TemplateEngine templateEngine = getTemplateEngine();
+		return  getTemplateEngine().process(templateName,context);
 	}
 }

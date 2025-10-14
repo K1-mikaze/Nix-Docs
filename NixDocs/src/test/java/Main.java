@@ -1,6 +1,5 @@
+import com.nixdocs.util.email.Email;
+import com.nixdocs.util.templateEngine.ThymeleafUtil;
 
-public class Main {
-    public static void main(String[] args) {
-        // Test Code here
-    }
+void main(){
 }

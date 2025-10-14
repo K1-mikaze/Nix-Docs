@@ -45,6 +45,11 @@ public class EnvironmentConfig {
     public static String getEmailPassword() {
         return getValue("EMAIL_PASSWORD", true);
     }
+
+    public static String getEmailHost() {
+        return getValue("EMAIL_HOST", false, "smtp.gmail.com");
+    }
+
     public static String getDbDriver() {
         return getValue("DB_DRIVER", false, "org.postgresql.Driver");
     }
