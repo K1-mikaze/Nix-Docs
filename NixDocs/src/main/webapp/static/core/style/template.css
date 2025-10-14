@@ -259,6 +259,14 @@ body {
   display: none;
 }
 
+.footer {
+  margin-top: 3rem;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  flex-flow: column;
+}
+
 @media (max-width: 800px) {
   body {
     grid-template-columns: 1fr;
