@@ -9,6 +9,7 @@ target/
 *.ear
 .env
 .smarttomcat/
+nb-configuration.xml
 
 # JetBrains IDE
 *.iml
