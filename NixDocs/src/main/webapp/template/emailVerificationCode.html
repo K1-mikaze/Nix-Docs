@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle}"></title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .logo {
+            max-width: 150px;
+            height: auto;
+        }
+        .content {
+            padding: 30px 20px;
+        }
+        .verification-code {
+            background-color: #f8f9fa;
+            border: 1px dashed #dee2e6;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 5px;
+            margin: 25px 0;
+            border-radius: 5px;
+            color: #495057;
+        }
+        .button {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #6c757d;
+            border-top: 1px solid #eee;
+        }
+        .social-links a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+      <img th:src="@{/static/image/Nix-Docs-logo.png}" alt="Nix Docs Logo" class="logo">
+    </div>
+    
+    <div class="content">
+        <h1>Verify Your Email Address</h1>
+        
+        <p>Hello <span th:text="${userName}"></span>,</p>
+        
+        <p>Thank you for creating an account with Nix Docs. To complete your registration, please verify your email address by entering the following code:</p>
+        
+        <div class="verification-code" >
+            
+          <p th:text="${verificationCode}"></p>
+        </div>
+        
+        <p>This verification code will expire in 24 hours.</p>
+        
+        <p>If you did not create an account with us, please ignore this email.</p>
+        
+        <p>Best regards,<br>The Nix Docs Team</p>
+    </div>
+    
+    <div class="footer">
+        <p>&copy; 2025 [Your Company Name]. All rights reserved.</p>
+        <p>[Your Company Address]</p>
+        
+        <div class="social-links">
+            <a href="[Facebook URL]">Facebook</a>
+            <a href="[Twitter URL]">Twitter</a>
+            <a href="[Instagram URL]">Instagram</a>
+        </div>
+        
+        <p>
+            <a href="[Unsubscribe Link]">Unsubscribe</a> | 
+            <a href="[Privacy Policy Link]">Privacy Policy</a>
+        </p>
+    </div>
+</body>
+</html>
