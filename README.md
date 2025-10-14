@@ -10,7 +10,7 @@ Nix Docs is project focus in solving the big documentation gap that the Nix Ecos
 
 - **Tomcat 11.0.11** 
 - **JAVA/JDK/OPENJDK 21** 
-- **PostgreSQL/MySQL** (based on your database configuration) 
+- **PostgreSQL**  
 
 ### Installation 
 
@@ -25,12 +25,18 @@ cd nix-docs
 You need to create a `.env` file next to your project `src` folder, with the database credentials like the following example: (Remember to add this file to your `.gitignore`)
 
 ```.env
-DB_URL=jdbc:postgresql://localhost:5432/nixdocs
-DB_USERNAME=postgres
-DB_PASSWORD=123
-DB_DRIVER=org.postgresql.Driver
-DB_MAX_POOL_SIZE=10
-DB_CONNECTION_TIMEOUT=30000
+#Required
+DB_URL=jdbc:postgresql://localhost:5432/example
+DB_USERNAME=user_name
+DB_PASSWORD=database_passwordj
+EMAIL_ADDRESS=example@gmail.com
+EMAIL_PASSWORD=email_password
+
+#Optional
+EMAIL_HOST=email_host
+DB_DRIVER=database_driver
+DB_MAX_POOL_SIZE=pool_size
+DB_CONNECTION_TIMEOUT=database_timeout
 ```
 
 3. **Build and deploy** 
@@ -63,7 +69,7 @@ Nix Docs es un proyecto enfocado en resolver la gran brecha de documentación qu
 
 - **Tomcat 11.0.11** 
 - **JAVA/JDK/OPENJDK 21** 
-- **PostgreSQL/MySQL** (basado en la configuracion de tu base de datos) 
+- **PostgreSQL**  
 
 ### Instalacion 
 
@@ -80,10 +86,18 @@ You need to create a `.env` file next to your project `src` folder, with the dat
 Necesitas crear un archivo llamado **.env**  al lado del la carpeta `src` con las credenciales de tu base de datos como en este ejemplo: (Recuerda añadir este archivo a tu `.gitignore`) 
 
 ```.env
-DB_URL=jdbc:postgresql://localhost:5432/nixdocs
-DB_URL=jdbc:mysql://localhost:5432/nixdocs
-DB_USERNAME=your_username
-DB_PASSWORD=your_password
+#Required
+DB_URL=jdbc:postgresql://localhost:5432/ejemplo
+DB_USERNAME=nombre_usuario
+DB_PASSWORD=contraseña_base_datos
+EMAIL_ADDRESS=ejemplo@gmail.com
+EMAIL_PASSWORD=contraseña
+
+#Optional
+EMAIL_HOST=email_host
+DB_DRIVER=controlador_base_datos
+DB_MAX_POOL_SIZE=pool_size
+DB_CONNECTION_TIMEOUT=database_timeout
 ```
 
 3. **Contruyelo y despliegalo** 

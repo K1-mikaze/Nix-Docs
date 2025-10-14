@@ -1,6 +1,5 @@
 package com.nixdocs.util.templateEngine;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.Map;
 
@@ -9,7 +8,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.Context;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.WebApplicationTemplateResolver;
@@ -81,6 +79,6 @@ public class ThymeleafUtil {
 
 	public static String getParsedTemplate (String templateName,WebContext context){
 		TemplateEngine templateEngine = getTemplateEngine();
-		return  getTemplateEngine().process(templateName,context);
+		return templateEngine.process(templateName,context);
 	}
 }
