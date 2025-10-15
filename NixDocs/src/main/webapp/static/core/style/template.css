@@ -4,6 +4,7 @@
   --hover-clr: #ccd0da;
   --text-clr: #081736;
   --secondary-text-clr: #081736;
+  --warning-clr: #df8e1d;
 }
 
 .darkmode {
@@ -12,6 +13,7 @@
   --hover-clr: #11101a;
   --text-clr: #eff1f5;
   --secondary-text-clr: #ccd0da;
+  --warning-clr: #f9e2af;
 }
 
 #theme-switch {
@@ -267,6 +269,19 @@ body {
   flex-flow: column;
 }
 
+
+.warning{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+color: var(--warning-clr);
+font-size: 12px;
+border-radius: 0.2rem;
+padding: 3px;
+  svg{
+  fill: var(--warning-clr);
+}
+}
 @media (max-width: 800px) {
   body {
     grid-template-columns: 1fr;

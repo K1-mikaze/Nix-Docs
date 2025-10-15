@@ -27,7 +27,7 @@
           <p th:text="${successMessage}"></p>
         </div>
 
-         <label for="email"></label><input type="text" id="email" name="email" placeholder="Username or email address" maxlength="320" required />
+         <label for="email"></label><input type="text" id="email" name="email" placeholder="Username or email address" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" maxlength="320" required />
          <label for="password"></label><input type="password" id="password" name="password" placeholder="Password" required />
         <button type="submit">Sign In</button>
         <p>or</p>

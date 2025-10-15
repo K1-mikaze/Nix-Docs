@@ -29,6 +29,7 @@ main {
   width: 300px;
   text-align: center;
   background-color: var(--base-clr);
+  margin-left: 0;
 }
 
 .createAccount-form button {
@@ -50,24 +51,6 @@ main {
   text-decoration: none;
 }
 
-.alert {
-  width: 300px;
-  padding: 10px;
-  border-radius: 0.4rem;
-  margin-bottom: 10px;
-}
-
-.alert-error {
-  background-color: rgba(255, 0, 0, 0.1);
-  border: 1px solid #ff0000;
-  color: #ff0000;
-}
-
-.alert-success {
-  background-color: rgba(0, 128, 0, 0.1);
-  border: 1px solid #008000;
-  color: #008000;
-}
 
 body {
   background-image: url(../image/wallpaper-center-light.png);
