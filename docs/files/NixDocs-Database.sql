@@ -1,0 +1,65 @@
+CREATE DATABASE nixdocs;
+
+CREATE TABLE DELETED_USERS(
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  username VARCHAR(50) NOT NULL,
+  email VARCHAR(320) UNIQUE NOT NULL,
+  password TEXT NOT NULL,
+  deletion TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE USERS(
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  username VARCHAR(50) NOT NULL,
+  email VARCHAR(320) UNIQUE NOT NULL,
+  password TEXT NOT NULL,
+  verified BOOL NOT NULL,
+  creation TIMESTAMP DEFAULT NOW()  
+);
+
+CREATE TABLE VERIFICATION_CODES(
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL,  
+  verification_code VARCHAR(6),
+  FOREIGN KEY(user_id) REFERENCES USERS(id)
+);
+
+CREATE TABLE LOGS(
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL,  
+  entry TIMESTAMP DEFAULT NOW(),
+  FOREIGN KEY(user_id) REFERENCES USERS(id)
+);
+
+CREATE TABLE PAGES (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  page_name VARCHAR(100) NOT NULL,
+  description VARCHAR(200)
+);
+
+CREATE TABLE CONTENTS(
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  page_id UUID NOT NULL,  
+  content_name VARCHAR(50),
+  content TEXT NOT NULL,
+  FOREIGN KEY(page_id) REFERENCES PAGES(id)
+);
+
+CREATE TABLE FEEDBACKS(
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  page_id UUID NOT NULL,  
+  user_id UUID NOT NULL,  
+  is_like BOOL NOT NULL,  
+  FOREIGN KEY(user_id) REFERENCES USERS(id),
+  FOREIGN KEY(page_id) REFERENCES PAGES(id)
+);
+
+CREATE TYPE system_type AS ENUM ('NIXPKGS', 'NIXOS', 'HOME-MANAGER');
+
+CREATE TABLE COMPATIBILITIES(
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  page_id UUID NOT NULL,
+  system system_type NOT NULL,
+  version VARCHAR(10) NOT NULL,
+  FOREIGN KEY(page_id) REFERENCES PAGES(id)
+);
