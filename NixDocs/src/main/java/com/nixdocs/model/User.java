@@ -3,31 +3,23 @@ package com.nixdocs.model;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
-/**
- * Clase que representa un usuario en el sistema.
- * Implementada como un JavaBean con getters y setters.
- */
 public class User {
-    private UUID id;
+    private UUID id = null;
     private String username;
     private String email;
-    private String passwordHash;
-    private ZonedDateTime createdAt;
+    private String password;
+    private boolean verified = false;
+    private ZonedDateTime creation;
 
-    // Constructor vacío requerido para JavaBean
     public User() {
     }
 
-    // Constructor con parámetros para facilitar la creación
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
-        // La contraseña se almacena sin hashear aquí, será hasheada en el repositorio
-        // antes de guardarla en la base de datos
-        this.passwordHash = password;
+        this.password = password;
     }
 
-    // Getters y setters
     public UUID getId() {
         return id;
     }
@@ -52,32 +44,32 @@ public class User {
         this.email = email;
     }
 
-    // Getter para passwordHash necesario para el repositorio
-    public String getPasswordHash() {
-        return passwordHash;
+    public boolean getVerified() {
+        return verified;
     }
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+    public void setVerified(boolean verified) {
+        this.verified = verified;
     }
 
-    public ZonedDateTime getCreatedAt() {
-        return createdAt;
+    public String getPassword() {
+        return password;
     }
 
-    public void setCreatedAt(ZonedDateTime createdAt) {
-        this.createdAt = createdAt;
+    public void setPassword(String passwordHash) {
+        this.password = passwordHash;
     }
 
-    /**
-     * Método para verificar si una contraseña coincide con el hash almacenado.
-     * Utiliza BCrypt para la verificación segura.
-     * 
-     * @param password La contraseña a verificar
-     * @return true si la contraseña coincide, false en caso contrario
-     */
+    public ZonedDateTime getCreation() {
+        return creation;
+    }
+
+    public void setCreation(ZonedDateTime creation) {
+        this.creation = creation;
+    }
+
     public boolean checkPassword(String password) {
-        return org.mindrot.jbcrypt.BCrypt.checkpw(password, this.passwordHash);
+        return org.mindrot.jbcrypt.BCrypt.checkpw(password, this.password);
     }
 
     @Override
@@ -86,7 +78,9 @@ public class User {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
-                ", createdAt=" + createdAt +
+                ", password='" + password + '\'' +
+                ", verified=" + verified +
+                ", creation=" + creation +
                 '}';
     }
 }

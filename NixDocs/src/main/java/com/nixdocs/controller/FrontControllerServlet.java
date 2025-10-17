@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,17 +36,26 @@ public class FrontControllerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response, "GET");
+        try {
+            processRequest(request, response, "GET");
+        }catch (SQLException e){
+            System.err.println(e);
+        }
+
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response, "POST");
+        try {
+            processRequest(request, response, "POST");
+        }catch (SQLException e){
+            System.err.println(e);
+        }
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response, String method)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         
         String pathInfo = request.getPathInfo();
 

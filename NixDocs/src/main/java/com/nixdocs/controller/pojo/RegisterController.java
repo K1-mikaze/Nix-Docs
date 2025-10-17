@@ -1,5 +1,7 @@
 package com.nixdocs.controller.pojo;
 
+import com.nixdocs.model.User;
+import com.nixdocs.repository.PostgresUserRepository;
 import com.nixdocs.util.templateEngine.ThymeleafUtil;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -7,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,30 +23,30 @@ public class RegisterController implements Controller {
     }
 
     @Override
-    public void processPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void processPost(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
         Map<String, Object> variables = new HashMap<>();
+        PostgresUserRepository postgresUserRepository = new PostgresUserRepository();
         if (!passwordSimilarity(request.getParameter("password"),request.getParameter("repeat-password"))) {
             variables.put("passwordNotEqual", "The passwords are not Equal");
         }
-        if (emailAlreadyExist()){
+        if (postgresUserRepository.findByEmail(request.getParameter("email")).isPresent()){
             variables.put("emailAlreadyExist","Email Already in use");
+            System.out.println(postgresUserRepository.findByEmail(request.getParameter("email")).isEmpty());
         }
-        if (usernameAlreadyExist()){
+        if (postgresUserRepository.findByUsername(request.getParameter("username")).isPresent()){
             variables.put("usernameAlreadyExist","Username Already in use");
+            System.out.println(postgresUserRepository.findByUsername(request.getParameter("username")).isEmpty());
         }
-        ThymeleafUtil.renderTemplate(request,response,"createAccount",variables);
+        if (!variables.isEmpty()){
+            ThymeleafUtil.renderTemplate(request,response,"createAccount",variables);
+        }else {
+            User user = new User(request.getParameter("username"),request.getParameter("email"),request.getParameter("password"));
+            postgresUserRepository.save(user);
+            ThymeleafUtil.renderTemplate(request,response,"index",variables);
+        }
     }
 
     private boolean passwordSimilarity(String password1,String password2){
         return password1.equals(password2);
-    }
-
-    private boolean emailAlreadyExist(){
-        // !TODO check if email exist in the database
-        return true;
-    }
-    private boolean usernameAlreadyExist(){
-        // !TODO check if username exist in the database
-        return true;
     }
 }
