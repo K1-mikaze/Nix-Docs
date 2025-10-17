@@ -1,6 +1,13 @@
-[Project Structure | Estructura del proyecto](./docs/project-structure.md) 
-[Git Workflow | Flujo del Git](./docs/git-workflow.md) 
 
+
+| Navegation / Navegacion |
+| ------------- |
+| [Project Structure / Estructura del Projecto ](./docs/project-structure.md) |
+| [Git Workflow / Flujo del Git](./docs/git-workflow.md) |
+| [Database / Base de Datos](./docs/database.md)  |
+
+
+---- 
 # Nix Docs English
 
 Nix Docs is project focus in solving the big documentation gap that the Nix Ecosystem has in a beginner friendly way.
