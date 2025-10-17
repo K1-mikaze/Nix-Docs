@@ -19,29 +19,29 @@
         <img th:src="@{/static/image/Nix-Docs-logo.png}" alt="Nix Docs Logo">
 
         <h2>Create an account in Nix Docs</h2>
-        <div th:if="${usernameAlreadyExist}" class="warning">
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#CDD6F4"><path d="m40-120 440-760 440 760H40Zm138-80h604L480-720 178-200Zm302-40q17 0 28.5-11.5T520-280q0-17-11.5-28.5T480-320q-17 0-28.5 11.5T440-280q0 17 11.5 28.5T480-240Zm-40-120h80v-200h-80v200Zm40-100Z"/></svg>
-          <span th:text="${usernameAlreadyExist}"></span>
-        </div>
         <label for="username">
+          <div th:if="${usernameAlreadyExist}" class="warning">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="24px" fill="#CDD6F4"><path d="m40-120 440-760 440 760H40Zm138-80h604L480-720 178-200Zm302-40q17 0 28.5-11.5T520-280q0-17-11.5-28.5T480-320q-17 0-28.5 11.5T440-280q0 17 11.5 28.5T480-240Zm-40-120h80v-200h-80v200Zm40-100Z"/></svg>
+            <span th:text="${usernameWarning}"></span>
+          </div>
           <input type="text" id="username" name="username" placeholder="Username" maxlength="50" required />
         </label>
-        <div th:if="${emailAlreadyExist}" class="warning">
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#CDD6F4"><path d="m40-120 440-760 440 760H40Zm138-80h604L480-720 178-200Zm302-40q17 0 28.5-11.5T520-280q0-17-11.5-28.5T480-320q-17 0-28.5 11.5T440-280q0 17 11.5 28.5T480-240Zm-40-120h80v-200h-80v200Zm40-100Z"/></svg>
-          <span th:text="${emailAlreadyExist}"></span>
-        </div>
         <label for="email">
+          <div th:if="${emailWarning}" class="warning">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="24px" fill="#CDD6F4"><path d="m40-120 440-760 440 760H40Zm138-80h604L480-720 178-200Zm302-40q17 0 28.5-11.5T520-280q0-17-11.5-28.5T480-320q-17 0-28.5 11.5T440-280q0 17 11.5 28.5T480-240Zm-40-120h80v-200h-80v200Zm40-100Z"/></svg>
+            <span th:text="${emailAlreadyExist}"></span>
+          </div>
           <input type="email" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="Email address"  maxlength="320" required />
         </label>
-        <div th:if="${passwordNotEqual}" class="warning">
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#CDD6F4"><path d="m40-120 440-760 440 760H40Zm138-80h604L480-720 178-200Zm302-40q17 0 28.5-11.5T520-280q0-17-11.5-28.5T480-320q-17 0-28.5 11.5T440-280q0 17 11.5 28.5T480-240Zm-40-120h80v-200h-80v200Zm40-100Z"/></svg>
-          <span th:text="${passwordNotEqual}"></span>
-        </div>
         <label for="password">
-          <input type="password" id="password" name="password" placeholder="Password" maxlength="50" required />
+          <div th:if="${passwordWarning}" class="warning">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="24px" fill="#CDD6F4"><path d="m40-120 440-760 440 760H40Zm138-80h604L480-720 178-200Zm302-40q17 0 28.5-11.5T520-280q0-17-11.5-28.5T480-320q-17 0-28.5 11.5T440-280q0 17 11.5 28.5T480-240Zm-40-120h80v-200h-80v200Zm40-100Z"/></svg>
+            <span th:text="${passwordNotEqual}"></span>
+          </div>
+          <input type="password" id="password" name="password" placeholder="Password" maxlength="50"  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" required />
         </label>
         <label for="repeat-password">
-          <input type="password" id="repeat-password" name="repeat-password" placeholder="Repeat password" maxlength="50" required />
+          <input type="password" id="repeat-password" name="repeat-password"  placeholder="Repeat password" maxlength="50" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" required />
         </label>
         <button type="submit">Create Account</button>
         <p>You already have an account? <a th:href="@{/app/login}" title="Go to Sign In">Sign in</a></p>

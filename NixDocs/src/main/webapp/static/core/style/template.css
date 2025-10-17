@@ -280,7 +280,9 @@ border-radius: 0.2rem;
 padding: 3px;
   svg{
   fill: var(--warning-clr);
-}
+  justify-self: center;
+  align-self: center;
+ }
 }
 @media (max-width: 800px) {
   body {

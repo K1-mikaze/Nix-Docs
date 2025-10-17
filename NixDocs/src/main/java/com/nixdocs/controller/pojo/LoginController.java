@@ -9,13 +9,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-/**
- * Controlador POJO para manejo de autenticación (login).
- */
 public class LoginController implements Controller {
 
     private final UserRepository userRepository = new PostgresUserRepository();
@@ -26,7 +24,7 @@ public class LoginController implements Controller {
     }
 
     @Override
-    public void processPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void processPost(HttpServletRequest request, HttpServletResponse response) throws IOException,SQLException {
         handleLogin(request, response);
     }
 
@@ -37,23 +35,19 @@ public class LoginController implements Controller {
         ThymeleafUtil.renderTemplate(request, response, "signIn", variables);
     }
 
-    public void handleLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String emailOrUsername = request.getParameter("email");
+    public void handleLogin(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
+        String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        if (emailOrUsername == null || emailOrUsername.trim().isEmpty() ||
+        if (email == null || email.trim().isEmpty() ||
             password == null || password.trim().isEmpty()) {
             setErrorAndRedirect(request, response, "Todos los campos son obligatorios");
             return;
         }
 
-        try {
-            Optional<User> userOptional = userRepository.findByEmail(emailOrUsername);
-            if (!userOptional.isPresent()) {
-                userOptional = userRepository.findByUsername(emailOrUsername);
-            }
+            Optional<User> userOptional = userRepository.findByEmail(email);
 
-            if (!userOptional.isPresent() || !userOptional.get().checkPassword(password)) {
+            if (userOptional.isEmpty() || !userOptional.get().checkPassword(password)) {
                 setErrorAndRedirect(request, response, "Credenciales inválidas");
                 return;
             }
@@ -68,9 +62,7 @@ public class LoginController implements Controller {
 
             // Redirigir a la nueva ruta de home gestionada por el Front Controller
             response.sendRedirect(request.getContextPath() + "/app/home");
-        } catch (Exception e) {
             setErrorAndRedirect(request, response, "Error interno al procesar el inicio de sesión");
-        }
     }
 
     private void setErrorAndRedirect(HttpServletRequest request, HttpServletResponse response, String message) throws IOException {

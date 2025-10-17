@@ -24,26 +24,43 @@ public class RegisterController implements Controller {
 
     @Override
     public void processPost(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
-        Map<String, Object> variables = new HashMap<>();
         PostgresUserRepository postgresUserRepository = new PostgresUserRepository();
-        if (!passwordSimilarity(request.getParameter("password"),request.getParameter("repeat-password"))) {
-            variables.put("passwordNotEqual", "The passwords are not Equal");
-        }
-        if (postgresUserRepository.findByEmail(request.getParameter("email")).isPresent()){
-            variables.put("emailAlreadyExist","Email Already in use");
-            System.out.println(postgresUserRepository.findByEmail(request.getParameter("email")).isEmpty());
-        }
-        if (postgresUserRepository.findByUsername(request.getParameter("username")).isPresent()){
-            variables.put("usernameAlreadyExist","Username Already in use");
-            System.out.println(postgresUserRepository.findByUsername(request.getParameter("username")).isEmpty());
-        }
+        Map<String, Object> variables = checkConditions(postgresUserRepository,request);
         if (!variables.isEmpty()){
             ThymeleafUtil.renderTemplate(request,response,"createAccount",variables);
         }else {
             User user = new User(request.getParameter("username"),request.getParameter("email"),request.getParameter("password"));
             postgresUserRepository.save(user);
-            ThymeleafUtil.renderTemplate(request,response,"index",variables);
+            ThymeleafUtil.renderTemplate(request,response,"signIn",variables);
         }
+    }
+
+    private Map<String,Object> checkConditions(PostgresUserRepository repository,HttpServletRequest request) throws SQLException{
+        Map<String, Object> variables = new HashMap<>();
+        String email = request.getParameter("email").trim();
+        String username = request.getParameter("username").trim();
+        String password = request.getParameter("password").trim();
+        String repeatPassword = request.getParameter("repeat-password").trim();
+
+        if (password.isBlank() || repeatPassword.isBlank()){
+            variables.put("passwordWarning", "password is Empty");
+        }else if (!passwordSimilarity(password,repeatPassword)) {
+            variables.put("passwordWarning", "The passwords are not Equal");
+        }
+        if (email.isBlank()){
+            variables.put("emailWarning","Email is Empty");
+        }
+        else if (repository.findByEmail(email).isPresent()){
+            variables.put("emailWarning","Email Already in use");
+        }
+
+        if (username.isBlank()){
+            variables.put("usernameWarning","Username is Empty");
+        }else if (repository.findByUsername(username).isPresent()){
+            variables.put("usernameAlreadyExist","Username Already in use");
+        }
+
+        return variables;
     }
 
     private boolean passwordSimilarity(String password1,String password2){
