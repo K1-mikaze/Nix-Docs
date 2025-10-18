@@ -1,4 +1,8 @@
-[test](#Base-De-Datos) 
+| Navegation | Navegacion |
+| -------------- | --------------- |
+| [Database](#Database) | [Base de Datos](#Base-de-Datos) |
+
+
 # Database
 
 This PostgreSQL database powers the NixDocs documentation platform, providing a robust foundation for user management, content storage, and system compatibility tracking.

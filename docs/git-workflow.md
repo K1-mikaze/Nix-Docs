@@ -1,3 +1,8 @@
+| Navegation | Navegacion |
+| -------------- | --------------- |
+| [Git Worflow](#Git-Workflow) | [Flujo de trabajo de Git](#Flujo-de-trabajo-de-Git) |
+
+
 # Git Workflow
 
 The Git Workflow of Nix Docs is defined in a special way, and has many different branches that can be sorted into Long-Running branches and Short-Running branches. The characteristic of Long-Running branches is that they only get new code using Merge and these branches are never deleted.

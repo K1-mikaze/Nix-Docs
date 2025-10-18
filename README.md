@@ -1,10 +1,11 @@
 
 
-| Navegation / Navegacion |
-| ------------- |
-| [Project Structure / Estructura del Projecto ](./docs/project-structure.md) |
-| [Git Workflow / Flujo del Git](./docs/git-workflow.md) |
-| [Database / Base de Datos](./docs/database.md)  |
+| Navegation   | Navegacion |
+| ------------- | ------------- |
+| [Installation](#Set-Up) | [Instalacion](#Configuracion) | 
+| [Project Structure  ](./docs/project-structure.md) | [Estructura del Projecto](./docs/project-structure.md) |
+| [Git Workflow](./docs/git-workflow.md) | [Flujo del Git](./docs/git-workflow.md) |
+| [Database](./docs/database.md) | [Base de Datos](./docs/database.md)  |
 
 
 ---- 

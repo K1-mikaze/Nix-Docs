@@ -1,3 +1,9 @@
+| Navegation | Navegacion |
+| -------------- | --------------- |
+| [Project Structure](#Project-Structure) | [Estructura del Proyecto](#Estructura-del-proyecto) |
+| [Folder Structure](##Folder-Structure) | [Estructura de Carpetas](#Estructura-de-Carpetas) |
+
+
 # Project Structure
 
 ![Project Structure](./docs/images/project-structure.png) 
@@ -15,6 +21,10 @@
 **util/environment**  Provides utilities for environment variable management and application configuration.
 
 **util/templateEngine**  Configures and manages the Thymeleaf template engine for view rendering.
+
+**util/email**  Configures and manages the email service.
+
+**util/validator**  Contain pattern validations.
 
 **webapp/template**  Contains HTML templates with Thymeleaf syntax for application views.
 
@@ -44,6 +54,10 @@
 **util/environment**  Proporciona utilidades para la gestión de variables de entorno y configuración de la aplicación.
 
 **util/templateEngine**  Configura y maneja el motor de plantillas Thymeleaf para el renderizado de vistas.
+
+**util/email**  Configura y maneja el servicio de envio de emails.
+
+**util/validator**  Contiene  patrones de validacion.
 
 **webapp/template**  Contiene las plantillas HTML con sintaxis Thymeleaf para las vistas de la aplicación.
 
