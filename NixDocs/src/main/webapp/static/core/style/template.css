@@ -5,6 +5,7 @@
   --text-clr: #081736;
   --secondary-text-clr: #081736;
   --warning-clr: #df8e1d;
+  --error-clr: #d20f39;
 }
 
 .darkmode {
@@ -14,6 +15,7 @@
   --text-clr: #eff1f5;
   --secondary-text-clr: #ccd0da;
   --warning-clr: #f9e2af;
+  --error-clr: #f38ba8;
 }
 
 #theme-switch {
@@ -269,6 +271,20 @@ body {
   flex-flow: column;
 }
 
+.error{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+color: var(--error-clr);
+font-size: 12px;
+border-radius: 0.2rem;
+padding: 3px;
+  svg{
+  fill: var(--error-clr);
+  justify-self: center;
+  align-self: center;
+ }
+}
 
 .warning{
   display: flex;

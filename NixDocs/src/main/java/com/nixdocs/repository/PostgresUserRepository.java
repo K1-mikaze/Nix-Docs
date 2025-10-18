@@ -13,7 +13,7 @@ public class PostgresUserRepository implements UserRepository {
 
     @Override
     public void save(User user) throws SQLException {
-        String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12));
+        String hashedPassword = hashPassword(user.getPassword());
         user.setPassword(hashedPassword);
 
         if (user.getId() == null) {
@@ -69,6 +69,7 @@ public class PostgresUserRepository implements UserRepository {
         return Optional.empty();
     }
 
+
     @Override
     public Optional<User> findByUsername(String username) throws SQLException {
         String sql = "SELECT id, username, email, password,verified,creation FROM users WHERE username = ?";
@@ -97,5 +98,13 @@ public class PostgresUserRepository implements UserRepository {
         user.setVerified(rs.getBoolean("verified"));
         user.setCreation(rs.getTimestamp("creation").toInstant().atZone(ZoneId.systemDefault()));
         return user;
+    }
+
+    public String hashPassword(String password){
+        return BCrypt.hashpw(password, BCrypt.gensalt(12));
+    }
+
+    public boolean verifyPassword(String plainPassword, String hashedPassword) {
+        return BCrypt.checkpw(plainPassword, hashedPassword);
     }
 }

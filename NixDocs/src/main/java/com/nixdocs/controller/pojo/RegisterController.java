@@ -3,6 +3,7 @@ package com.nixdocs.controller.pojo;
 import com.nixdocs.model.User;
 import com.nixdocs.repository.PostgresUserRepository;
 import com.nixdocs.util.templateEngine.ThymeleafUtil;
+import com.nixdocs.util.validator.Validators;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -43,21 +44,25 @@ public class RegisterController implements Controller {
         String repeatPassword = request.getParameter("repeat-password").trim();
 
         if (password.isBlank() || repeatPassword.isBlank()){
-            variables.put("passwordWarning", "password is Empty");
+            variables.put("passwordWarning", "Password is Empty");
+
+        }else if(!Validators.isValidPassword(password)){
+            variables.put("passwordError", "Password is Must have at least 8 characters,an Uppercase letter, a Number and a Special Character");
+
         }else if (!passwordSimilarity(password,repeatPassword)) {
-            variables.put("passwordWarning", "The passwords are not Equal");
+            variables.put("passwordError", "The passwords are not Equal");
         }
         if (email.isBlank()){
             variables.put("emailWarning","Email is Empty");
         }
         else if (repository.findByEmail(email).isPresent()){
-            variables.put("emailWarning","Email Already in use");
+            variables.put("emailError","Email Already in use");
         }
 
         if (username.isBlank()){
             variables.put("usernameWarning","Username is Empty");
         }else if (repository.findByUsername(username).isPresent()){
-            variables.put("usernameAlreadyExist","Username Already in use");
+            variables.put("usernameError","Username Already in use");
         }
 
         return variables;

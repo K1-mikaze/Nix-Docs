@@ -15,6 +15,7 @@ main {
   justify-self: center;
   align-self: center;
   justify-content: center;
+  gap: 25px;
   align-items: center;
   text-align: center;
   border: solid 2px var(--line-clr);

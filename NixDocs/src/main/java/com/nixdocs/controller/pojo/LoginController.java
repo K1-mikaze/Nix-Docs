@@ -6,7 +6,6 @@ import com.nixdocs.repository.UserRepository;
 import com.nixdocs.util.templateEngine.ThymeleafUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -31,42 +30,44 @@ public class LoginController implements Controller {
     public void showLoginForm(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Map<String, Object> variables = new HashMap<>();
         variables.put("pageTitle", "Sign In");
-
         ThymeleafUtil.renderTemplate(request, response, "signIn", variables);
     }
 
     public void handleLogin(HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-
-        if (email == null || email.trim().isEmpty() ||
-            password == null || password.trim().isEmpty()) {
-            setErrorAndRedirect(request, response, "Todos los campos son obligatorios");
-            return;
-        }
-
-            Optional<User> userOptional = userRepository.findByEmail(email);
-
-            if (userOptional.isEmpty() || !userOptional.get().checkPassword(password)) {
-                setErrorAndRedirect(request, response, "Credenciales inválidas");
-                return;
+        Map<String, Object> variables = new HashMap<>();
+        String email = request.getParameter("email").trim();
+        String password = request.getParameter("password").trim();
+        if (!password.isBlank() && !email.isBlank()) {
+             checkIfUserExist(email,password,request,response,variables);
+        }else {
+            if (email.isBlank()) {
+                variables.put("emailWarning", "Email is Empty");
             }
-
-            // Usuario autenticado
-            User authenticatedUser = userOptional.get();
-            HttpSession session = request.getSession(true);
-            session.setAttribute("userId", authenticatedUser.getId().toString());
-            session.setAttribute("username", authenticatedUser.getUsername());
-            session.setAttribute("email", authenticatedUser.getEmail());
-            session.setAttribute("authenticated", true);
-
-            // Redirigir a la nueva ruta de home gestionada por el Front Controller
-            response.sendRedirect(request.getContextPath() + "/app/home");
-            setErrorAndRedirect(request, response, "Error interno al procesar el inicio de sesión");
+            if (password.isBlank()) {
+                variables.put("passwordWarning", "Password is Empty");
+            }
+            ThymeleafUtil.renderTemplate(request,response,"signIn",variables);
+        }
     }
 
-    private void setErrorAndRedirect(HttpServletRequest request, HttpServletResponse response, String message) throws IOException {
-        request.getSession().setAttribute("errorMessage", message);
-        response.sendRedirect(request.getContextPath() + "/app/login");
+
+    private void checkIfUserExist(String email,String password,HttpServletRequest request,HttpServletResponse response,Map<String,Object> variables) throws  SQLException,IOException {
+        PostgresUserRepository postgresUserRepository = new PostgresUserRepository();
+        Optional<User> user = postgresUserRepository.findByEmail(email);
+        if (user.isEmpty() ){
+            variables.put("emailError","User Not Found");
+            ThymeleafUtil.renderTemplate(request,response,"signIn",variables);
+            return;
+        }else{
+            User userObtained = user.get();
+            if (postgresUserRepository.verifyPassword(password,userObtained.getPassword())){
+                variables.put("user",userObtained);
+                ThymeleafUtil.renderTemplate(request,response,"index",variables);
+            }else {
+                variables.put("passwordError", "Incorrect Password");
+                ThymeleafUtil.renderTemplate(request,response,"signIn",variables);
+            }
+        }
     }
+
 }
