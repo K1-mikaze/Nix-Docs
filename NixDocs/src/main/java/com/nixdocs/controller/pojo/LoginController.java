@@ -52,15 +52,13 @@ public class LoginController implements Controller {
 
 
     private void checkIfUserExist(String email,String password,HttpServletRequest request,HttpServletResponse response,Map<String,Object> variables) throws  SQLException,IOException {
-        PostgresUserRepository postgresUserRepository = new PostgresUserRepository();
-        Optional<User> user = postgresUserRepository.findByEmail(email);
+        Optional<User> user = userRepository.findByEmail(email);
         if (user.isEmpty() ){
             variables.put("emailError","User Not Found");
             ThymeleafUtil.renderTemplate(request,response,"signIn",variables);
-            return;
         }else{
             User userObtained = user.get();
-            if (postgresUserRepository.verifyPassword(password,userObtained.getPassword())){
+            if (userRepository.verifyPassword(password,userObtained.getPassword())){
                 variables.put("user",userObtained);
                 ThymeleafUtil.renderTemplate(request,response,"index",variables);
             }else {
